@@ -1,14 +1,13 @@
 import rigoImageUrl from "../assets/img/rigo-baby.jpg";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
-import Card from "../components/Card.jsx"
+import Nuevo from "../components/Nuevo.jsx";
 
-export const Home = () => {
+export const Contact = () => {
 
   const {store, dispatch} =useGlobalReducer()
 
-	return (
-
-	<Card />
-
-	);
+    return (
+        
+        < Nuevo />
+    );
 }; 
