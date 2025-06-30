@@ -63,3 +63,27 @@ body {
 .contact-actions i:hover {
   color: red;
 }
+
+.boton {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 250px;
+} 
+
+form {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.enlace{
+  display: block;
+  text-align: center;
+  margin-top: 20px;
+}
+
+h1{
+  text-align: center;
+  margin-bottom: 30px;  
+}
