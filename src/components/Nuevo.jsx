@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 
 const Nuevo = () => {
 
@@ -15,9 +16,9 @@ const [address, setAddress] = useState("");
 //Funcion para crear nuevo contacto
 function createContact(newContact) {
     let contact = newContact;   
-    fetch('https://playground.4geeks.com/contact/contacts/pepitolio', {
+    fetch('https://playground.4geeks.com/contact/agendas/pepitolio/contacts', {
         method: "POST",
-        body: JSON.stringify(newContact),
+        body: JSON.stringify(contact),
         headers: {
             "Content-Type": "application/json"
         }
@@ -25,7 +26,7 @@ function createContact(newContact) {
         .then(response => {
             console.log(response);
             if (response.status === 201) {
-                getContacts();
+                alert("Contact created successfully!");
             }
             return response.json()
         })
@@ -60,31 +61,7 @@ function addContact(event) {
         .catch((error) => console.log(error))
 } 
 
-	//Funcion para obtener los contactos
-function getContacts() {
-    fetch('https://playground.4geeks.com/contact/contacts/pepitolio')
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            } 
-        })
-        .then((data) => {
-            setContact(data);
-        })
-        .catch((error) => console.log(error));
-}  
-
-//Funcion para borrar un contacto
-	 function deleteContact(id) {
-    fetch(`https://playground.4geeks.com/contact/contacts/${id}`, { method: "DELETE" })
-        .then((response) => {
-            if (response.ok) {
-                getContacts();  
-            }
-            return response.json()
-        })
-        .then((data) => setContact(data))
-        .catch((error) => console.log(error)) }
+ 
 
         
 
@@ -107,7 +84,9 @@ return (
         <label for="address" className="form-label">Address</label>
         <input type="text" className="form-control" id="address" placeholder="Enter Address" value={address} onChange={(e) => setAddress(e.target.value)} />
     </div>
+
     <button type="submit" className="btn btn-primary">Send</button>
+  
 </form>
 
 );
