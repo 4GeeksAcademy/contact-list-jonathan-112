@@ -10,15 +10,7 @@ const [email, setEmail] = useState("");
 const [phone, setPhone] = useState("");
 const [address, setAddress] = useState("");
 
-//Funcion para crear un usuario
- function createUser() {
-    fetch('https://playground.4geeks.com/contact/agendas/pepitolio', { method: "POST" })
-        .then((response) => {
-            return response.json()
-        })
-        .then((data) => setUser(data))
-        .catch((error) => console.log(error))
-} 
+
 
 //Funcion para crear nuevo contacto
 function createContact(newContact) {
