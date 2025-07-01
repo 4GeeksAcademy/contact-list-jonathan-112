@@ -50,6 +50,41 @@ function addContact(event) {
     setPhone("");
     setAddress("");
 }     
+//Funcion para crear un usuario
+ function createUser() {
+    fetch('https://playground.4geeks.com/contact/agendas/pepitolio', { method: "POST" })
+        .then((response) => {
+            return response.json()
+        })
+        .then((data) => setUser(data))
+        .catch((error) => console.log(error))
+} 
+
+	//Funcion para obtener los contactos
+function getContacts() {
+    fetch('https://playground.4geeks.com/contact/contacts/pepitolio')
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            } 
+        })
+        .then((data) => {
+            setContact(data);
+        })
+        .catch((error) => console.log(error));
+}  
+
+//Funcion para borrar un contacto
+	 function deleteContact(id) {
+    fetch(`https://playground.4geeks.com/contact/contacts/${id}`, { method: "DELETE" })
+        .then((response) => {
+            if (response.ok) {
+                getContacts();  
+            }
+            return response.json()
+        })
+        .then((data) => setContact(data))
+        .catch((error) => console.log(error)) }
 
         
 

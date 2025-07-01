@@ -7,7 +7,7 @@ import React, { useState, useEffect } from "react";
 export const Home = () => {
 
 	const { store, dispatch } = useGlobalReducer()
-    const [contacts, setContacts] = useState([]);
+    const [contact, setContact] = useState([]);
     const [user, setUser] = useState("");
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -37,7 +37,7 @@ function getContacts() {
             } 
         })
         .then((data) => {
-            setContacts(data);
+            setContact(data);
         })
         .catch((error) => console.log(error));
 }  
@@ -62,7 +62,7 @@ function getContacts() {
 			</Link>
 		</div>
 
-		{contacts.map((contact) => (
+		{contact.map((contact) => (
                 <Card key={contact.id} contact={contact} onDelete={deleteContact} />
             ))}
         </div>
