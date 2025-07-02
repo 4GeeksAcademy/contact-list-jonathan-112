@@ -2,25 +2,20 @@ import React, { useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import { createUser, getContacts, } from "../fetchApi"; 
 
-const Nuevo = () => {
-let infoContact = JSON.parse(localStorage.getItem("infoContact"));
-console.log(infoContact);
+export const Formulario = () => {
+
 
 // Estado para almacenar los contactos y el usuario
 const [contact, setContact] = useState([]);
 const [user, setUser] = useState("");
-const [name, setName] = useState(infoContact.name);
-const [email, setEmail] = useState(infoContact.email);
-const [phone, setPhone] = useState(infoContact.phone);
-const [address, setAddress] = useState(infoContact.address);
-const { id } = useParams(); 
+const [name, setName] = useState("");
+const [email, setEmail] = useState("");
+const [phone, setPhone] = useState("");
+const [address, setAddress] = useState("");
 
 useEffect (() => {
     getContacts(setContact);
 }, []);
-console.log(contact);
-
-
 
 //Funcion para crear nuevo contacto
 function createContact(newContact) {
@@ -61,42 +56,11 @@ function addContact(event) {
     setAddress("");
 }     
 
- //Funcion para editar un contacto
-    function editContact(e) {
-        e.preventDefault();
-        console.log(name);
-       fetch(`https://playground.4geeks.com/contact/agendas/pepitolio/contacts/${id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                name: name,
-                email: email,
-                phone: phone,
-                address: address,
-            })
-        })
-            .then((response) => {
-                console.log(response);
-                
-                if (response.ok) {
-                    getContacts();
-                }
-                return response.json();
-            })
-            .then((data) => {
-                console.log(data);
-            }); 
-        };
- 
-console.log(name);
-
         
 
 
 return (
-<form onSubmit={editContact}>
+<form onSubmit={addContact}>
     <div className="mb-3">
         <label htmlFor="name" className="form-label">Full Name</label>
         <input type="text" className="form-control" id="name" placeholder="Full Name" value={name} onChange={(e) => setName(e.target.value)} />
@@ -115,9 +79,9 @@ return (
     </div>
 
     <button type="submit" className="btn btn-primary">Send</button>
+    <Link className="enlace" to="/">or get back to contacts</Link>
   
 </form>
 
 );
 };
-export default Nuevo;

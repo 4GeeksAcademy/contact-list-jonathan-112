@@ -1,11 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Contact } from "../pages/Contact";
 import Nuevo from "./Nuevo";
+import { Link, useNavigate } from "react-router-dom";
 
-const Card = ({ contact, onDelete }) => {
-
+const Card = ({ contact, onDelete, onEdit }) => {
+let navigate = useNavigate();
 	
-
+function handleClick(params) {
+    let contactString = JSON.stringify(contact);
+    localStorage.setItem("infoContact", contactString);
+    navigate(`/nuevo/${contact.id}`);
+}
 
 return (
     <div className="contact-card">
@@ -17,7 +22,9 @@ return (
             <p><i className="fas fa-envelope"></i> {contact.email}</p>
         </div>
         <div className="contact-actions">
-            <i className="fas fa-pencil-alt"></i>
+         
+            <i className="fas fa-pencil-alt" onClick={() => handleClick(contact.id)}></i>
+            
             <i className="fas fa-trash" onClick={() => onDelete(contact.id)}></i>
         </div>
         </div>
